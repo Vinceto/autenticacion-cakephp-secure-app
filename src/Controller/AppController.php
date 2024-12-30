@@ -41,6 +41,9 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        if($this->shouldRedirectToVerificationController()){
+            $this->redirect(['controller' => 'verification', 'action' => 'index']);
+        }
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Authentication.Authentication');
@@ -50,5 +53,9 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    private function shouldRedirectToVerificationController(){
+        return !is_null($this->request->getSession()->read('2fa_needed')) && $this->request->getPath() !== '/verification';
     }
 }

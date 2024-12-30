@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $phone_number
  * @property string $country_code
  * @property string $password
+ * @property string $secretv
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  */
@@ -33,6 +34,7 @@ class User extends Entity
         'phone_number' => true,
         'country_code' => true,
         'password' => true,
+        'secret' => true,
         'created' => true,
         'modified' => true,
     ];
@@ -63,5 +65,13 @@ class User extends Entity
 
     public function getPhoneNumber(): string {
         return "+{$this->country_code}{$this->phone_number}";
+    }
+
+    public function getSecret(): string {
+        return $this->secret;
+    }
+
+    public function getEmail(): string {
+        return $this->email;
     }
 }

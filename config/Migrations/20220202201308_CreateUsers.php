@@ -14,42 +14,43 @@ class CreateUsers extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('users');
-        $table->addColumn('email', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
-        $table->addColumn('phone_number', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
-        $table->addColumn('country_code', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
-        $table->addColumn('password', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
-        ]);
-        $table->addColumn('created', 'datetime', [
-            'default' => null,
-            'null' => false,
-        ]);
-        $table->addColumn('modified', 'datetime', [
-            'default' => null,
-            'null' => false,
-        ]);
-        $table->addIndex([
-            'email',
-        
+        if (!$this->hasTable('users')) {
+            $table = $this->table('users');
+            $table->addColumn('email', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('phone_number', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('country_code', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('password', 'string', [
+                'default' => null,
+                'limit' => 255,
+                'null' => false,
+            ]);
+            $table->addColumn('created', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addColumn('modified', 'datetime', [
+                'default' => null,
+                'null' => false,
+            ]);
+            $table->addIndex([
+                'email',
             ], [
-            'name' => 'UNIQUE_EMAIL',
-            'unique' => true,
-        ]);
-        $table->create();
+                'name' => 'UNIQUE_EMAIL',
+                'unique' => true,
+            ]);
+            $table->create();
+        }
     }
 }

@@ -1,0 +1,7 @@
+Pasos para google2fa
+
+composer require pragmarx/google2fa
+composer require bacon/bacon-qr-code
+
+-- requerimiento
+1) generar un codigo secreto para cada usuario (unico y persistente)

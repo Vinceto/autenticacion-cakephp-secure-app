@@ -112,9 +112,11 @@ class UsersController extends AppController
 
         if ($result->isValid()) {
             $redirect = $this->request->getQuery('redirect', [
-                'controller' => 'Users',
+                'controller' => 'Verification',
                 'action' => 'index',
             ]);
+
+            $this->request->getSession()->write('2fa_needed', true);
 
             return $this->redirect($redirect);
         }

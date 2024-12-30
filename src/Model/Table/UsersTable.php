@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use PragmaRX\Google2FA\Google2FA;
 
 /**
  * Users Model
@@ -97,5 +98,11 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
 
         return $rules;
+    }
+
+    public function beforeSave($event, $entity, $options){
+        if(empty($entity->secret)){
+            return $entity->secret = (new Google2FA()) ->generateSecretKey();
+        }
     }
 }
