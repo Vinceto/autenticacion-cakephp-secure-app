@@ -5,3 +5,21 @@ composer require bacon/bacon-qr-code
 
 -- requerimiento
 1) generar un codigo secreto para cada usuario (unico y persistente)
+
+    bin/cake bake migration AlterUsers secret:string
+    bin/cake migrations migrate
+
+2) modificar entity users para hacer accesible el nuevo campo secret
+
+3) modifica el UsersTable para crear un evento beforeSave y guardar el secret
+
+4) crear el controlador VerificationController
+
+    bin/cake bake controller Verification
+
+5) agregar libreria imagic al php.ini de la version php usada (en este caso 7.4.X)
+    C:\wamp64\bin\php\php7.4.33\php.ini
+    extension=imagick
+
+6) agregar el .dll a C:\wamp64\bin\php\php7.4.33\ext\php_imagick.dll , el dll debe ser compatible con la version de php usada, se deja un respaldo en la raiz del proyecto
+    php_imagick.dll
